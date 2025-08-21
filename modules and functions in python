@@ -1,0 +1,45 @@
+Task 1: Calculate Factorial Using a Function
+
+# Step 1: Define the factorial function
+def factorial(n):
+    if n < 0:
+        return "Factorial is not defined for negative numbers."
+    elif n == 0 or n == 1:
+        return 1
+    else:
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
+# Step 2: Call the function with a sample number
+num = int(input("Enter a number to calculate its factorial: "))
+print(f"The factorial of {num} is: {factorial(num)}")
+Enter a number to calculate its factorial: 3
+The factorial of 3 is: 6
+
+
+Task 2: Using the Math Module for Calculations
+
+import math
+
+# Step 1: Ask the user for a number
+num = float(input("Enter a number: "))
+
+# Step 2: Perform calculations using math module
+square_root = math.sqrt(num)
+natural_log = math.log(num) if num > 0 else "Undefined (log not defined for zero or negative numbers)"
+sine_value = math.sin(num)  # num is taken in radians
+
+# Step 3: Display results
+print(f"\nResults for number {num}:")
+print(f"Square root: {square_root}")
+print(f"Natural logarithm (base e): {natural_log}")
+print(f"Sine (in radians): {sine_value}")
+
+Enter a number: 24
+
+Results for number 24.0:
+Square root: 4.898979485566356
+Natural logarithm (base e): 3.1780538303479458
+Sine (in radians): -0.9055783620066239
