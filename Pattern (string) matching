@@ -1,0 +1,50 @@
+Table Setup
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(50),
+    Email VARCHAR(50)
+);
+
+INSERT INTO Employees (EmpID, Name, Department, Email)
+VALUES
+(1, 'Alice Johnson', 'HR', 'alice.johnson@example.com'),
+(2, 'Bob Smith', 'IT', 'bob.smith@example.com'),
+(3, 'Charlie Brown', 'Finance', 'charlie.brown@example.com'),
+(4, 'Diana Prince', 'HR', 'diana.prince@example.com'),
+(5, 'Eve Adams', 'IT', 'eve.adams@example.org');
+
+✅ Queries
+1. List employees whose email addresses belong to the example.com domain
+SELECT Name, Email
+FROM Employees
+WHERE Email LIKE '%@example.com';
+
+2. List all employees whose names start with the letter "A"
+SELECT Name
+FROM Employees
+WHERE Name LIKE 'A%';
+
+3. List employees whose names end with "son"
+SELECT Name
+FROM Employees
+WHERE Name LIKE '%son';
+
+4. Find employees whose names have "V" as the second letter
+SELECT Name
+FROM Employees
+WHERE Name LIKE '_V%';
+
+
+
+5. List employees who work in departments that contain "IT" in their names
+SELECT Name, Department
+FROM Employees
+WHERE Department LIKE '%IT%';
+
+6. Find employees whose department names include "hr" (case-insensitive)
+
+
+SELECT Name, Department
+FROM Employees
+WHERE LOWER(Department) LIKE '%hr%';
