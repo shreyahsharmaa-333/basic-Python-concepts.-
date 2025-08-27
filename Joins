@@ -1,0 +1,75 @@
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    EmpName VARCHAR(50),
+    DepartmentID INT
+);
+
+INSERT INTO Employees (EmpID, EmpName, DepartmentID)
+VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', 103),
+(4, 'Diana', NULL),
+(5, 'Eve', 101);
+
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DeptName VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+INSERT INTO Departments (DepartmentID, DeptName, Location)
+VALUES
+(101, 'HR', 'New York'),
+(102, 'IT', 'San Francisco'),
+(103, 'Finance', 'Chicago'),
+(104, 'Sales', 'Boston');
+
+
+Employees with department names (only those with department assigned) → INNER JOIN
+SELECT e.EmpID, e.EmpName, d.DeptName
+FROM Employees e
+INNER JOIN Departments d
+ON e.DepartmentID = d.DepartmentID;
+
+2. All employees and department names (NULL if no department) → LEFT JOIN
+SELECT e.EmpID, e.EmpName, d.DeptName
+FROM Employees e
+LEFT JOIN Departments d
+ON e.DepartmentID = d.DepartmentID;
+
+3. All departments and their employees (NULL if no employee) → RIGHT JOIN (or LEFT JOIN with swapped tables)
+SELECT d.DepartmentID, d.DeptName, e.EmpName
+FROM Departments d
+LEFT JOIN Employees e
+ON d.DepartmentID = e.DepartmentID;
+
+4. All employees and all departments, including those without matches → FULL OUTER JOIN
+SELECT e.EmpID, e.EmpName, d.DepartmentID, d.DeptName
+FROM Employees e
+FULL OUTER JOIN Departments d
+ON e.DepartmentID = d.DepartmentID;
+
+
+
+
+5. Combination of all employees and departments → CROSS JOIN
+SELECT e.EmpName, d.DeptName
+FROM Employees e
+CROSS JOIN Departments d;
+
+6. Combined list of employee names and department names → UNION
+SELECT EmpName AS Name FROM Employees
+UNION
+SELECT DeptName AS Name FROM Departments;
+
+7. Department IDs in both Employees and Departments → INTERSECT
+SELECT DepartmentID FROM Employees
+INTERSECT
+SELECT DepartmentID FROM Departments;
+
+8. Department IDs in Departments but not in Employees → EXCEPT / MINUS
+SELECT DepartmentID FROM Departments
+EXCEPT
+SELECT DepartmentID FROM Employees;
