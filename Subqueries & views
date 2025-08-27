@@ -1,0 +1,50 @@
+able Definition & Sample Data
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(50),
+    Price DECIMAL(10, 2),
+    QuantitySold INT,
+    Category VARCHAR(50)
+);
+
+INSERT INTO Products (ProductID, ProductName, Price, QuantitySold, Category)
+VALUES
+(1, 'Laptop', 800.00, 5, 'Electronics'),
+(2, 'Smartphone', 600.00, 10, 'Electronics'),
+(3, 'Desk Chair', 120.00, 15, 'Furniture'),
+(4, 'Table', 200.00, 8, 'Furniture'),
+(5, 'Notebook', 5.00, 20, 'Stationery'),
+(6, 'Pen', 2.00, 50, 'Stationery');
+
+✅ Queries
+1. Retrieve all products whose price is higher than the average price of all products
+SELECT ProductName, Price
+FROM Products
+WHERE Price > (SELECT AVG(Price) FROM Products);
+
+2. Display the name and price of the most expensive product
+SELECT ProductName, Price
+FROM Products
+WHERE Price = (SELECT MAX(Price) FROM Products);
+
+3. Display the total number of products in each category using a subquery
+SELECT Category,
+       (SELECT COUNT(*) 
+        FROM Products p2 
+        WHERE p2.Category = p1.Category) AS TotalProducts
+FROM Products p1
+GROUP BY Category;
+
+
+
+
+4. Find products that sold fewer units than the average quantity sold across all products
+SELECT ProductName, QuantitySold
+FROM Products
+WHERE QuantitySold < (SELECT AVG(QuantitySold) FROM Products);
+
+5. Create a view called ElectronicsView for all products in "Electronics"
+CREATE VIEW ElectronicsView AS
+SELECT *
+FROM Products
+WHERE Category = 'Electronics';
